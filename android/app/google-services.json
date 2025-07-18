@@ -1,0 +1,287 @@
+{
+  "project_info": {
+    "project_number": "150496980543",
+    "firebase_url": "https://grubb-ba0e4.firebaseio.com",
+    "project_id": "grubb-ba0e4",
+    "storage_bucket": "grubb-ba0e4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150496980543:android:ccce1293403024068fd28a",
+        "android_client_info": {
+          "package_name": "com.example.grubbmerchant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "150496980543-n8ct3m6a1r79qjoar12ecah435m80oe1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnMaSLOL-pC39WALaZCNxosyw3L1tKOx0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "150496980543-kcc1gmlvtv0dlta0ateek5etsaj4onse.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "150496980543-ghnfng7jrilbj8nejd7jrmu9vjrp68iv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.grubb.restaurant"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150496980543:android:6bad3e1b24f4339e8fd28a",
+        "android_client_info": {
+          "package_name": "com.example.grubbonlyios"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "150496980543-n8ct3m6a1r79qjoar12ecah435m80oe1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnMaSLOL-pC39WALaZCNxosyw3L1tKOx0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "150496980543-kcc1gmlvtv0dlta0ateek5etsaj4onse.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "150496980543-ghnfng7jrilbj8nejd7jrmu9vjrp68iv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.grubb.restaurant"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150496980543:android:242290751e11cbac8fd28a",
+        "android_client_info": {
+          "package_name": "com.geubb.driver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "150496980543-kpfo7gf12bn5p74kd3193h25ot876323.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.geubb.driver",
+            "certificate_hash": "69c9e98b60445dc228660acde176715dfc6d6727"
+          }
+        },
+        {
+          "client_id": "150496980543-n8ct3m6a1r79qjoar12ecah435m80oe1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnMaSLOL-pC39WALaZCNxosyw3L1tKOx0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "150496980543-kcc1gmlvtv0dlta0ateek5etsaj4onse.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "150496980543-ghnfng7jrilbj8nejd7jrmu9vjrp68iv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.grubb.restaurant"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150496980543:android:26144984ae6288c78fd28a",
+        "android_client_info": {
+          "package_name": "com.grubb.customer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "150496980543-0f7t3j0kq86l8mdae36pobql6637n2b8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.grubb.customer",
+            "certificate_hash": "69c9e98b60445dc228660acde176715dfc6d6727"
+          }
+        },
+        {
+          "client_id": "150496980543-n8ct3m6a1r79qjoar12ecah435m80oe1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnMaSLOL-pC39WALaZCNxosyw3L1tKOx0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "150496980543-kcc1gmlvtv0dlta0ateek5etsaj4onse.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "150496980543-ghnfng7jrilbj8nejd7jrmu9vjrp68iv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.grubb.restaurant"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150496980543:android:0f8c6334abba026c8fd28a",
+        "android_client_info": {
+          "package_name": "com.grubb.customer.grubbcustomernewandroid35"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "150496980543-n8ct3m6a1r79qjoar12ecah435m80oe1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnMaSLOL-pC39WALaZCNxosyw3L1tKOx0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "150496980543-kcc1gmlvtv0dlta0ateek5etsaj4onse.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "150496980543-ghnfng7jrilbj8nejd7jrmu9vjrp68iv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.grubb.restaurant"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150496980543:android:8678f66c1276139d8fd28a",
+        "android_client_info": {
+          "package_name": "com.grubb.grubbnew"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "150496980543-n8ct3m6a1r79qjoar12ecah435m80oe1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnMaSLOL-pC39WALaZCNxosyw3L1tKOx0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "150496980543-kcc1gmlvtv0dlta0ateek5etsaj4onse.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "150496980543-ghnfng7jrilbj8nejd7jrmu9vjrp68iv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.grubb.restaurant"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150496980543:android:3ac0639c287fce678fd28a",
+        "android_client_info": {
+          "package_name": "com.grubb.restaurant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "150496980543-73iafr15b91fflp21djd6iajrca1f66m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.grubb.restaurant",
+            "certificate_hash": "69c9e98b60445dc228660acde176715dfc6d6727"
+          }
+        },
+        {
+          "client_id": "150496980543-n8ct3m6a1r79qjoar12ecah435m80oe1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnMaSLOL-pC39WALaZCNxosyw3L1tKOx0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "150496980543-kcc1gmlvtv0dlta0ateek5etsaj4onse.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "150496980543-ghnfng7jrilbj8nejd7jrmu9vjrp68iv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.grubb.restaurant"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

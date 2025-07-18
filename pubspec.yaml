@@ -1,0 +1,124 @@
+name: foodie_customer
+description: A new Flutter application.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 43.0.0+83
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  shared_preferences:
+  connectivity_plus:
+  firebase_core: ^2.26.0
+  firebase_crashlytics: ^3.5.3
+  #  libphonenumber_plugin: ^0.3.3
+  firebase_auth: ^4.17.7
+  cloud_firestore: ^4.15.9
+  firebase_storage: ^11.7.5
+  firebase_messaging:  ^14.7.10
+  flutter_local_notifications:
+  flutter_facebook_auth:
+  geoflutterfire2:
+  geolocator:
+  geocoding:
+  webview_flutter:
+  googleapis_auth:
+  mercadopago_sdk:
+  flutterwave_standard:
+  razorpay_flutter:
+
+  image_picker:
+  url_launcher:
+  progress_dialog_null_safe:
+  intl:
+  cached_network_image:
+  uuid:
+  video_thumbnail:
+  path_provider:
+  photo_view:
+  video_player:
+  flutter_dotenv:
+  flutter_markdown:
+  google_generative_ai:
+#  speech_to_text:
+  smooth_page_indicator:
+  intl_phone_number_input:
+  pin_code_fields:
+  easy_localization: ^3.0.3
+  mime:
+  moor_flutter:
+  path:
+  font_awesome_flutter:
+  flutter_polyline_points: ^1.0.0
+  percent_indicator:
+  lottie:
+  flutter_image_compress: ^1.1.0
+  video_compress:
+  flutter_sound:
+  the_apple_sign_in:
+  cupertino_icons:
+  dotted_border: ^2.0.0+3
+  flutter_rating_bar:
+  place_picker:
+  google_maps_flutter:
+  flutter_staggered_grid_view:
+  clipboard:
+  location:
+  esc_pos_utils:
+  mobile_scanner: ^3.5.2
+  flutter_widget_from_html:
+  scroll_to_index:
+  rect_getter:
+  story_view:
+  share_plus: ^7.2.1
+  flutterflow_paginate_firestore: any
+  bottom_picker:
+  mailer:
+  firebase_vertexai:
+  carousel_slider:
+
+
+dependency_overrides:
+  http:
+  webview_flutter:
+  flutter_stripe:
+  stripe_android:
+  stripe_ios:
+  flutter_inappwebview: ^6.0.0-beta.24
+#  fluttertoast: any
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/map_style.json
+    - assets/images/address/
+    - assets/translations/
+    - assets/fonts/
+    - assets/flags/
+    - assets/json file/
+    - assets/
+    - .env
+
+  fonts:
+    - family: Poppinsb
+      fonts:
+        - asset: assets/fonts/Poppins-Bold.ttf
+
+    - family: Poppinsl
+      fonts:
+        - asset: assets/fonts/Poppins-Light.ttf
+
+    - family: Poppinsm
+      fonts:
+        - asset: assets/fonts/Poppins-Medium.ttf
+
+    - family: Poppinsr
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+
+    - family: Poppinssb
+      fonts:
+        - asset: assets/fonts/Poppins-SemiBold.ttf

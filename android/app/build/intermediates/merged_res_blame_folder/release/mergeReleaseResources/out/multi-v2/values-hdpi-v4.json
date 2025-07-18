@@ -1,0 +1,38 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.grubb.customer.app-mergeReleaseResources-155:/values-hdpi-v4/values-hdpi-v4.xml",
+            "map": [
+                {
+                    "source": "/Users/imac/.gradle/caches/8.9/transforms/806caa01c27f0b8f462b632665f64287/transformed/appcompat-1.7.0/res/values-hdpi-v4/values-hdpi-v4.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "6",
+                        "endColumns": "13",
+                        "endOffsets": "327"
+                    },
+                    "to": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "119",
+                        "endLines": "7",
+                        "endColumns": "13",
+                        "endOffsets": "391"
+                    }
+                },
+                {
+                    "source": "/Users/imac/.gradle/caches/8.9/transforms/ccea0bb53fa574f2743c4ceeb7828784/transformed/jetified-payments-core-21.6.0/res/values-hdpi-v4/values-hdpi-v4.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "63",
+                        "endOffsets": "114"
+                    }
+                }
+            ]
+        }
+    ]
+}
