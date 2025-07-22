@@ -150,8 +150,8 @@ android {
         applicationId = "com.grubb.customer"
         minSdk = 24
         targetSdk = 35
-        versionCode = 43
-        versionName = "83.0.0"
+        versionCode = 44
+        versionName = "84.0.0"
 
     }
 
@@ -169,7 +169,7 @@ android {
         create("release") {
             keyAlias = "key0"
             keyPassword = "Grubb@321"
-            storeFile = File("/Users/imac/Documents/shivam_project/grubbcustomernewandroid35/grubb_customer.jks")
+            storeFile = File("/Users/imac/Documents/shivam_project/GrubbAndroid35version18-07/grubb_customer.jks")
             storePassword = "Grubb@321"
         }
     }

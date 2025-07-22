@@ -2171,6 +2171,7 @@ class _HomeScreenTwoState extends State<HomeScreenTwo> {
       String statusB = getVendorStatus(b);
 
       int weight(VendorModel vendor, String status) {
+
         if (vendor.commingsoon) return 3; // Coming Soon always last
         if (status == 'Open') return 0;
         if (status == 'Pre-order') return 1;
@@ -2909,14 +2910,18 @@ class _HomeScreenTwoState extends State<HomeScreenTwo> {
   //   );
   // }
   String getVendorStatus(VendorModel vendorModel) {
+    // If temporarily closed, always return 'Closed'
+    if (vendorModel.isTempClose == true) {
+      return 'Closed';
+    }
+
     final now = DateTime.now();
     final String today = DateFormat('EEEE').format(now); // e.g., Monday
 
-    // આજે ના workingHours filter કરો
-    final todayHours =
-        vendorModel.workingHours
-            .where((element) => element.day == today)
-            .toList();
+    // આજના workingHours filter કરો
+    final todayHours = vendorModel.workingHours
+        .where((element) => element.day == today)
+        .toList();
 
     if (todayHours.isEmpty ||
         todayHours[0].timeslot == null ||
@@ -2944,6 +2949,43 @@ class _HomeScreenTwoState extends State<HomeScreenTwo> {
 
     return isOpen ? 'Open' : 'Pre-order';
   }
+
+  // String getVendorStatus(VendorModel vendorModel) {
+  //   final now = DateTime.now();
+  //   final String today = DateFormat('EEEE').format(now); // e.g., Monday
+  //
+  //   // આજે ના workingHours filter કરો
+  //   final todayHours =
+  //       vendorModel.workingHours
+  //           .where((element) => element.day == today)
+  //           .toList();
+  //
+  //   if (todayHours.isEmpty ||
+  //       todayHours[0].timeslot == null ||
+  //       todayHours[0].timeslot!.isEmpty) {
+  //     return 'Closed';
+  //   }
+  //
+  //   final currentTime = DateFormat("HH:mm").parse(
+  //     "${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}",
+  //   );
+  //
+  //   bool isOpen = false;
+  //
+  //   for (var slot in todayHours[0].timeslot!) {
+  //     if (slot.from == null || slot.to == null) continue;
+  //
+  //     final fromTime = DateFormat("HH:mm").parse(slot.from!);
+  //     final toTime = DateFormat("HH:mm").parse(slot.to!);
+  //
+  //     if (currentTime.isAfter(fromTime) && currentTime.isBefore(toTime)) {
+  //       isOpen = true;
+  //       break;
+  //     }
+  //   }
+  //
+  //   return isOpen ? 'Open' : 'Pre-order';
+  // }
 
   @override
   void dispose() {
