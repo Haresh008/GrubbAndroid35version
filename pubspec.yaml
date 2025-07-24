@@ -2,7 +2,7 @@ name: foodie_customer
 description: A new Flutter application.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 44.0.0+84
+version: 46.0.0+86
 
 environment:
   sdk: ^3.7.2

@@ -1405,34 +1405,63 @@ class PaymentScreenState extends State<PaymentScreen> {
   bool paypal = false;
 
   ///RazorPay payment function
-  void openCheckout({required amount, required orderId}) async {
+  // void openCheckout({required amount, required orderId}) async {
+  //   var options = {
+  //     'key': razorpayKey,
+  //     'amount': amount * 100,
+  //     'name': 'Grubb',
+  //     'order_id': orderId,
+  //     "currency": currencyModel?.code,
+  //     'description': 'Payment for Order $orderId',
+  //     'retry': {'enabled': true, 'max_count': 1},
+  //     'send_sms_hash': true,
+  //     'one_click_checkout': true,
+  //     'force_cod': true,
+  //     'prefill': {
+  //       'contact': MyAppState.currentUser!.phoneNumber,
+  //       'email': MyAppState.currentUser!.email,
+  //     },
+  //     'external': {
+  //       'wallets': ['paytm'],
+  //     },
+  //   };
+  //
+  //   try {
+  //     _razorPay.open(options);
+  //   } catch (e) {
+  //     debugPrint('Error: $e');
+  //   }
+  // }
+  void openCheckout({required var amount, required orderId}) async {
+    print("amount shu ave che $amount");
+
+    int finalAmount = (amount * 100).toInt();
+    print("final amount shu ave che $finalAmount");
+
     var options = {
-      'key': razorpayKey,
-      'amount': amount * 100,
+      'key': razorPayData!.razorpayKey,
+      'amount': finalAmount, // Must be int in paise
       'name': 'Grubb',
       'order_id': orderId,
       "currency": currencyModel?.code,
       'description': 'Payment for Order $orderId',
       'retry': {'enabled': true, 'max_count': 1},
       'send_sms_hash': true,
-      'one_click_checkout': true,
-      'force_cod': true,
       'prefill': {
         'contact': MyAppState.currentUser!.phoneNumber,
         'email': MyAppState.currentUser!.email,
       },
       'external': {
-        'wallets': ['paytm'],
-      },
+        'wallets': ['paytm']
+      }
     };
 
     try {
       _razorPay.open(options);
     } catch (e) {
-      debugPrint('Error: $e');
+      debugPrint('error: $e');
     }
   }
-
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     print("response.paymentId!${response.paymentId!}");
     print("response.paymentId!${widget.total}");

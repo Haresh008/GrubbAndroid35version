@@ -150,8 +150,8 @@ android {
         applicationId = "com.grubb.customer"
         minSdk = 24
         targetSdk = 35
-        versionCode = 44
-        versionName = "84.0.0"
+        versionCode = 46
+        versionName = "86.0.0"
 
     }
 
