@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -620,7 +621,7 @@ class _CartScreenState extends State<CartScreen> {
     //setPrefData();
   }
 
-  Future<void> checkIfVendorIsOpen(String vendorId) async {
+  Future<void> checkIfVendorIsOpen(var vendorId) async {
     // Current time in "HH:mm" format
     final currentTime = DateFormat('HH:mm').format(DateTime.now());
     final currentDay = DateFormat(
@@ -649,32 +650,46 @@ class _CartScreenState extends State<CartScreen> {
               final toTime = slot['to'];
 
               if (_isTimeWithinRange(currentTime, fromTime, toTime)) {
-                print('Vendor is open');
-                widget.isopen = true;
+
+                log('Vendor is open');
+                log('Vendor is open${currentTime}');
+                log('Vendor is open${fromTime}');
+                log('Vendor is open${toTime}');
+                setState(() {
+                  widget.isopen = true;
+                });
                 return;
               }
             }
           }
         }
       }
+    setState(() {
       widget.isopen = false;
+    });
       // If no matching time slot is found
-      print('Vendor is closed');
+      log('Vendor is closed');
     } catch (e) {
-      print('Error: $e');
+      log('Error: $e');
     }
   }
 
   String? catproducatmart;
 
+  // bool _isTimeWithinRange(String currentTime, String fromTime, String toTime) {
+  //   final current = _convertTimeToMinutes(currentTime);
+  //   final from = _convertTimeToMinutes(fromTime);
+  //   final to = _convertTimeToMinutes(toTime);
+  //
+  //   return current >= from && current <= to;
+  // }
   bool _isTimeWithinRange(String currentTime, String fromTime, String toTime) {
     final current = _convertTimeToMinutes(currentTime);
     final from = _convertTimeToMinutes(fromTime);
     final to = _convertTimeToMinutes(toTime);
 
-    return current >= from && current <= to;
+    return current >= from && current < to;
   }
-
   // Helper function to convert "HH:mm" to total minutes
   int _convertTimeToMinutes(String time) {
     final parts = time.split(':');
@@ -733,7 +748,7 @@ class _CartScreenState extends State<CartScreen> {
                                   itemCount: cartProducts.length,
                                   itemBuilder: (context, index) {
                                     vendorID = cartProducts[index].vendorID;
-                                    checkIfVendorIsOpen(vendorID);
+                                    // checkIfVendorIsOpen(vendorID);
                                     // fetchWorkingHours(vendorID);
                                     print("vendor id ave che ${vendorID}");
                                     return Container(
@@ -3788,7 +3803,7 @@ class _CartScreenState extends State<CartScreen> {
             .collection('vendors')
             .doc(vendoridvendorid)
             .get();
-
+    checkIfVendorIsOpen(vendoridvendorid);
     if (vendorDoc.exists) {
       var vendorData = vendorDoc.data() as Map<String, dynamic>? ?? {};
 

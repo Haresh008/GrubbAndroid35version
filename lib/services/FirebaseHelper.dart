@@ -14,6 +14,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+
 // import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:foodie_customer/main.dart';
 import 'package:foodie_customer/model/AddressModel.dart';
@@ -122,8 +123,8 @@ class FireStoreUtils {
         .toList();
   }
 
-  Future<RatingModel?> getOrderReviewsbyID(
-      String ordertId, String productId) async {
+  Future<RatingModel?> getOrderReviewsbyID(String ordertId,
+      String productId) async {
     RatingModel? ratingproduct;
     QuerySnapshot<Map<String, dynamic>> vendorsQuery = await firestore
         .collection(Order_Rating)
@@ -576,40 +577,43 @@ class FireStoreUtils {
         'https://fcm.googleapis.com/v1/projects/grubb-ba0e4/messages:send';
 
     // Unique message ID to avoid multiple notifications
-    final messageId = DateTime.now().millisecondsSinceEpoch.toString();
+    final messageId = DateTime
+        .now()
+        .millisecondsSinceEpoch
+        .toString();
     NotificationModel? notificationModel = await getNotificationContent(type);
-    final notificationPayload = {
-      "message": {
-        "token": token,
-        "data": {
-          "title": notificationModel?.subject ?? '',
-          "body": notificationModel?.message ?? '',
-          "sound": "tune",
-        },
-        "android": {
-          "notification": {
-            "sound": "tune",
-            "default_vibrate_timings": true,
-            "default_light_settings": true,
-          },
-        },
-        "apns": {
-          "payload": {
-            "aps": {
-              "alert": {
-                "title": notificationModel?.subject ?? '',
-                "body": notificationModel?.message ?? '',
-              },
-              "sound": "tune.aiff",
-            },
-          },
-        },
-        "notification": {
-          "title": notificationModel?.subject ?? '',
-          "body": notificationModel?.message ?? '',
-        },
-      },
-    };
+    // final notificationPayload = {
+    //   "message": {
+    //     "token": token,
+    //     "data": {
+    //       "title": notificationModel?.subject ?? '',
+    //       "body": notificationModel?.message ?? '',
+    //       "sound": "tune",
+    //     },
+    //     "android": {
+    //       "notification": {
+    //         "sound": "tune",
+    //         "default_vibrate_timings": true,
+    //         "default_light_settings": true,
+    //       },
+    //     },
+    //     "apns": {
+    //       "payload": {
+    //         "aps": {
+    //           "alert": {
+    //             "title": notificationModel?.subject ?? '',
+    //             "body": notificationModel?.message ?? '',
+    //           },
+    //           "sound": "tune.aiff",
+    //         },
+    //       },
+    //     },
+    //     "notification": {
+    //       "title": notificationModel?.subject ?? '',
+    //       "body": notificationModel?.message ?? '',
+    //     },
+    //   },
+    // };
 
     // final notificationPayload = {
     //   "message": {
@@ -638,6 +642,41 @@ class FireStoreUtils {
     //   },
     // };
 
+
+    final notificationPayload = {
+      "message": {
+        "token": token,
+        // "data": {
+        //   "title": notificationModel?.subject ?? '',
+        //   "body": notificationModel?.message ?? '',
+        //   "sound": "tune",
+        // },
+        "android": {
+          "notification": {
+            "sound": "tune",
+            "channel_id": "custom_sound_channel", // ✅ REQUIRED for custom sound
+            "default_vibrate_timings": true,
+            "default_light_settings": true,
+          },
+        },
+        "apns": {
+          "payload": {
+            "aps": {
+              "alert": {
+                "title": notificationModel?.subject ?? '',
+                "body": notificationModel?.message ?? '',
+              },
+              "sound": "tune.aiff",
+            },
+          },
+        },
+        "notification": {
+          "title": notificationModel?.subject ?? '',
+          "body": notificationModel?.message ?? '',
+        },
+      },
+    };
+
     try {
       final response = await http.post(
         Uri.parse(url),
@@ -659,8 +698,8 @@ class FireStoreUtils {
     }
   }
 
-  static Future<bool> sendChatFcmMessage(
-      String title, String message, String token) async {
+  static Future<bool> sendChatFcmMessage(String title, String message,
+      String token) async {
     try {
       var url = 'https://fcm.googleapis.com/fcm/send';
       var header = {
@@ -702,7 +741,10 @@ class FireStoreUtils {
         'https://fcm.googleapis.com/v1/projects/grubb-ba0e4/messages:send';
 
     // Unique message ID to avoid multiple notifications
-    final messageId = DateTime.now().millisecondsSinceEpoch.toString();
+    final messageId = DateTime
+        .now()
+        .millisecondsSinceEpoch
+        .toString();
 
     final notificationPayload = {
       "message": {
@@ -807,8 +849,8 @@ class FireStoreUtils {
     });
   }
 
-  static Future<String> uploadUserImageToFireStorage(
-      File image, String userID) async {
+  static Future<String> uploadUserImageToFireStorage(File image,
+      String userID) async {
     Reference upload = storage.child('images/$userID.png');
 
     UploadTask uploadTask = upload.putFile(image);
@@ -816,7 +858,9 @@ class FireStoreUtils {
     await (await uploadTask.whenComplete(() {})).ref.getDownloadURL();
     return downloadUrl.toString();
   }
-  Future<Url> uploadChatImageToFireStorage(File image, BuildContext context) async {
+
+  Future<Url> uploadChatImageToFireStorage(File image,
+      BuildContext context) async {
     showProgress(context, 'Uploading image...', false);
     var uniqueID = Uuid().v4();
     Reference upload = storage.child('images/$uniqueID.png');
@@ -835,7 +879,8 @@ class FireStoreUtils {
     UploadTask uploadTask = upload.putFile(compressedFile);
     uploadTask.snapshotEvents.listen((event) {
       updateProgress(
-        'Uploading image ${(event.bytesTransferred.toDouble() / 1000).toStringAsFixed(2)} / '
+        'Uploading image ${(event.bytesTransferred.toDouble() / 1000)
+            .toStringAsFixed(2)} / '
             '${(event.totalBytes.toDouble() / 1000).toStringAsFixed(2)} KB',
       );
     });
@@ -889,8 +934,8 @@ class FireStoreUtils {
   //       mime: metaData.contentType ?? 'image', url: downloadUrl.toString());
   // }
 
-  Future<ChatVideoContainer> uploadChatVideoToFireStorage(
-      File video, BuildContext context) async {
+  Future<ChatVideoContainer> uploadChatVideoToFireStorage(File video,
+      BuildContext context) async {
     showProgress(context, 'Uploading video...', false);
     var uniqueID = Uuid().v4();
     Reference upload = storage.child('videos/$uniqueID.mp4');
@@ -899,7 +944,8 @@ class FireStoreUtils {
     UploadTask uploadTask = upload.putFile(compressedVideo, metadata);
     uploadTask.snapshotEvents.listen((event) {
       updateProgress(
-          'Uploading video ${(event.bytesTransferred.toDouble() / 1000).toStringAsFixed(2)} /'
+          'Uploading video ${(event.bytesTransferred.toDouble() / 1000)
+              .toStringAsFixed(2)} /'
               '${(event.totalBytes.toDouble() / 1000).toStringAsFixed(2)} '
               'KB');
     });
@@ -944,7 +990,8 @@ class FireStoreUtils {
     }
 
     UploadTask uploadTask = upload.putFile(compressedImage);
-    var downloadUrl = await (await uploadTask.whenComplete(() {})).ref.getDownloadURL();
+    var downloadUrl = await (await uploadTask.whenComplete(() {})).ref
+        .getDownloadURL();
     return downloadUrl.toString();
   }
 
@@ -956,7 +1003,8 @@ class FireStoreUtils {
         userStreamController.sink.add(userModel);
       } catch (e) {
         debugPrint(
-            'FireStoreUtils.getUserByID failed to parse user object ${user.id}');
+            'FireStoreUtils.getUserByID failed to parse user object ${user
+                .id}');
       }
     });
     yield* userStreamController.stream;
@@ -971,7 +1019,8 @@ class FireStoreUtils {
         stripeStreamController.sink.add(userModel);
       } catch (e) {
         debugPrint(
-            'FireStoreUtils.getUserByID failed to parse user object ${user.id}');
+            'FireStoreUtils.getUserByID failed to parse user object ${user
+                .id}');
       }
     });
     yield* stripeStreamController.stream;
@@ -1115,7 +1164,8 @@ class FireStoreUtils {
         // razorpaySecret = userModel.razorpaySecret;
       } catch (e) {
         debugPrint(
-            'FireStoreUtils.getUserByID failed to parse user object ${user.id}');
+            'FireStoreUtils.getUserByID failed to parse user object ${user
+                .id}');
       }
     });
 
@@ -1240,7 +1290,8 @@ class FireStoreUtils {
             products.add(ProductModel.fromJson(document.data()));
           } catch (e) {
             debugPrint(
-                'productspppp**-FireStoreUtils.getAllProducts Parse error $e  ${document.data()['id']}');
+                'productspppp**-FireStoreUtils.getAllProducts Parse error $e  ${document
+                    .data()['id']}');
           }
         });
     return products;
@@ -1270,7 +1321,8 @@ class FireStoreUtils {
     UploadTask uploadTask = upload.putFile(file, metadata);
     uploadTask.snapshotEvents.listen((event) {
       updateProgress(
-          'Uploading Audio ${(event.bytesTransferred.toDouble() / 1000).toStringAsFixed(2)} /'
+          'Uploading Audio ${(event.bytesTransferred.toDouble() / 1000)
+              .toStringAsFixed(2)} /'
               '${(event.totalBytes.toDouble() / 1000).toStringAsFixed(2)} '
               'KB');
     });
@@ -1512,7 +1564,8 @@ class FireStoreUtils {
       for (var document in vendorsQuery.docs) {
         try {
           vendors.add(VendorModel.fromJson(document.data()));
-          print("Vendor: ${document['title']}, City: ${document['addresscity']}");
+          print(
+              "Vendor: ${document['title']}, City: ${document['addresscity']}");
         } catch (e) {
           print('Error parsing vendor: $e');
         }
@@ -1523,9 +1576,6 @@ class FireStoreUtils {
 
     return vendors;
   }
-
-
-
 
 
   StreamSubscription? ordersStreamSub;
@@ -1560,8 +1610,8 @@ class FireStoreUtils {
     yield* ordersStreamController!.stream;
   }
 
-  Stream<List<BookTableModel>> getBookingOrders(
-      String userID, bool isUpComing) async* {
+  Stream<List<BookTableModel>> getBookingOrders(String userID,
+      bool isUpComing) async* {
     List<BookTableModel> orders = [];
 
     if (isUpComing) {
@@ -2266,7 +2316,8 @@ class FireStoreUtils {
     await Future.forEach(documentReference.docs,
             (QueryDocumentSnapshot<Map<String, dynamic>> document) {
           try {
-            topUpHistoryList.add(TopupTranHistoryModel.fromJson(document.data()));
+            topUpHistoryList.add(
+                TopupTranHistoryModel.fromJson(document.data()));
           } catch (e) {
             print('FireStoreUtils.getAllProducts Parse error $e');
           }
@@ -2274,12 +2325,11 @@ class FireStoreUtils {
     return topUpHistoryList;
   }
 
-  static Future topUpWalletAmount(
-      {String paymentMethod = "test",
-        bool isTopup = true,
-        required amount,
-        required id,
-        orderId = ""}) async {
+  static Future topUpWalletAmount({String paymentMethod = "test",
+    bool isTopup = true,
+    required amount,
+    required id,
+    orderId = ""}) async {
     print("this is te payment id");
     print(id);
     print(MyAppState.currentUser!.userID);
@@ -2355,10 +2405,9 @@ class FireStoreUtils {
     });
   }
 
-  static sendTopUpMail(
-      {required String amount,
-        required String paymentMethod,
-        required String tractionId}) async {
+  static sendTopUpMail({required String amount,
+    required String paymentMethod,
+    required String tractionId}) async {
     EmailTemplateModel? emailTemplateModel =
     await FireStoreUtils.getEmailTemplates(walletTopup);
 
@@ -2380,10 +2429,9 @@ class FireStoreUtils {
         recipients: [MyAppState.currentUser!.email]);
   }
 
-  static sendAdminTopUpMail(
-      {required String amount,
-        required String paymentMethod,
-        required String tractionId}) async {
+  static sendAdminTopUpMail({required String amount,
+    required String paymentMethod,
+    required String tractionId}) async {
     EmailTemplateModel? emailTemplateModel =
     await FireStoreUtils.getEmailTemplates(walletTopup);
     DocumentSnapshot<Map<String, dynamic>> settingsSnapshot =
@@ -2441,7 +2489,8 @@ class FireStoreUtils {
         DateFormat('yyyy-MM-dd').format(orderModel.createdAt.toDate()));
     newString = newString.replaceAll(
       "{address}",
-      '${orderModel.address.line1} ${orderModel.address.line2}, ${orderModel.address.city}, ${orderModel.address.country}',
+      '${orderModel.address.line1} ${orderModel.address.line2}, ${orderModel
+          .address.city}, ${orderModel.address.country}',
     );
     newString = newString.replaceAll(
       "{paymentmethod}",
@@ -2455,7 +2504,10 @@ class FireStoreUtils {
     double taxAmount = 0.0;
     double tipValue = 0.0;
     String specialLabel =
-        '(${orderModel.specialDiscount!['special_discount_label']}${orderModel.specialDiscount!['specialType'] == "amount" ? currencyModel!.symbol : "%"})';
+        '(${orderModel.specialDiscount!['special_discount_label']}${orderModel
+        .specialDiscount!['specialType'] == "amount"
+        ? currencyModel!.symbol
+        : "%"})';
     List<String> htmlList = [];
 
     if (orderModel.deliveryCharge != null) {
@@ -2476,18 +2528,28 @@ class FireStoreUtils {
       String extrasDisVal = '';
       for (int i = 0; i < addon!.length; i++) {
         extrasDisVal +=
-        '${addon[i].toString().replaceAll("\"", "")} ${(i == addon.length - 1) ? "" : ","}';
+        '${addon[i].toString().replaceAll("\"", "")} ${(i == addon.length - 1)
+            ? ""
+            : ","}';
       }
       String product = """
         <tr>
-            <td style="width: 20%; border-top: 1px solid rgb(0, 0, 0);">${element.name}</td>
-            <td style="width: 20%; border: 1px solid rgb(0, 0, 0);" rowspan="2">${element.quantity}</td>
-            <td style="width: 20%; border: 1px solid rgb(0, 0, 0);" rowspan="2">${amountShow(amount: element.price.toString())}</td>
-            <td style="width: 20%; border: 1px solid rgb(0, 0, 0);" rowspan="2">${amountShow(amount: element.extras_price.toString())}</td>
-            <td style="width: 20%; border: 1px solid rgb(0, 0, 0);" rowspan="2">${amountShow(amount: ((element.quantity * double.parse(element.extras_price!) + (element.quantity * double.parse(element.price)))).toString())}</td>
+            <td style="width: 20%; border-top: 1px solid rgb(0, 0, 0);">${element
+          .name}</td>
+            <td style="width: 20%; border: 1px solid rgb(0, 0, 0);" rowspan="2">${element
+          .quantity}</td>
+            <td style="width: 20%; border: 1px solid rgb(0, 0, 0);" rowspan="2">${amountShow(
+          amount: element.price.toString())}</td>
+            <td style="width: 20%; border: 1px solid rgb(0, 0, 0);" rowspan="2">${amountShow(
+          amount: element.extras_price.toString())}</td>
+            <td style="width: 20%; border: 1px solid rgb(0, 0, 0);" rowspan="2">${amountShow(
+          amount: ((element.quantity * double.parse(element.extras_price!) +
+              (element.quantity * double.parse(element.price)))).toString())}</td>
         </tr>
         <tr>
-            <td style="width: 20%;">${extrasDisVal.isEmpty ? "" : "Extra Item : $extrasDisVal"}</td>
+            <td style="width: 20%;">${extrasDisVal.isEmpty
+          ? ""
+          : "Extra Item : $extrasDisVal"}</td>
         </tr>
     """;
       htmlList.add(product);
@@ -2510,7 +2572,11 @@ class FireStoreUtils {
                 amount: (total - discount - specialDiscount).toString(),
                 taxModel: element);
         String taxHtml =
-        """<span style="font-size: 1rem;">${element.title}: ${amountShow(amount: calculateTax(amount: (total - discount - specialDiscount).toString(), taxModel: element).toString())}${taxList!.indexOf(element) == taxList!.length - 1 ? "</span>" : "<br></span>"}""";
+        """<span style="font-size: 1rem;">${element.title}: ${amountShow(
+            amount: calculateTax(
+                amount: (total - discount - specialDiscount).toString(),
+                taxModel: element).toString())}${taxList!.indexOf(element) ==
+            taxList!.length - 1 ? "</span>" : "<br></span>"}""";
         taxHtmlList.add(taxHtml);
       }
     }
@@ -2617,7 +2683,8 @@ class FireStoreUtils {
         DateFormat('yyyy-MM-dd').format(orderModel.createdAt.toDate()));
     newString = newString.replaceAll(
       "{address}",
-      '${orderModel.address.line1} ${orderModel.address.line2}, ${orderModel.address.city}, ${orderModel.address.country}',
+      '${orderModel.address.line1} ${orderModel.address.line2}, ${orderModel
+          .address.city}, ${orderModel.address.country}',
     );
     newString = newString.replaceAll(
       "{paymentmethod}",
@@ -2631,7 +2698,10 @@ class FireStoreUtils {
     double taxAmount = 0.0;
     double tipValue = 0.0;
     String specialLabel =
-        '(${orderModel.specialDiscount!['special_discount_label']}${orderModel.specialDiscount!['specialType'] == "amount" ? currencyModel!.symbol : "%"})';
+        '(${orderModel.specialDiscount!['special_discount_label']}${orderModel
+        .specialDiscount!['specialType'] == "amount"
+        ? currencyModel!.symbol
+        : "%"})';
     List<String> htmlList = [];
 
     if (orderModel.deliveryCharge != null) {
@@ -2652,18 +2722,28 @@ class FireStoreUtils {
       String extrasDisVal = '';
       for (int i = 0; i < addon!.length; i++) {
         extrasDisVal +=
-        '${addon[i].toString().replaceAll("\"", "")} ${(i == addon.length - 1) ? "" : ","}';
+        '${addon[i].toString().replaceAll("\"", "")} ${(i == addon.length - 1)
+            ? ""
+            : ","}';
       }
       String product = """
         <tr>
-            <td style="width: 20%; border-top: 1px solid rgb(0, 0, 0);">${element.name}</td>
-            <td style="width: 20%; border: 1px solid rgb(0, 0, 0);" rowspan="2">${element.quantity}</td>
-            <td style="width: 20%; border: 1px solid rgb(0, 0, 0);" rowspan="2">${amountShow(amount: element.price.toString())}</td>
-            <td style="width: 20%; border: 1px solid rgb(0, 0, 0);" rowspan="2">${amountShow(amount: element.extras_price.toString())}</td>
-            <td style="width: 20%; border: 1px solid rgb(0, 0, 0);" rowspan="2">${amountShow(amount: ((element.quantity * double.parse(element.extras_price!) + (element.quantity * double.parse(element.price)))).toString())}</td>
+            <td style="width: 20%; border-top: 1px solid rgb(0, 0, 0);">${element
+          .name}</td>
+            <td style="width: 20%; border: 1px solid rgb(0, 0, 0);" rowspan="2">${element
+          .quantity}</td>
+            <td style="width: 20%; border: 1px solid rgb(0, 0, 0);" rowspan="2">${amountShow(
+          amount: element.price.toString())}</td>
+            <td style="width: 20%; border: 1px solid rgb(0, 0, 0);" rowspan="2">${amountShow(
+          amount: element.extras_price.toString())}</td>
+            <td style="width: 20%; border: 1px solid rgb(0, 0, 0);" rowspan="2">${amountShow(
+          amount: ((element.quantity * double.parse(element.extras_price!) +
+              (element.quantity * double.parse(element.price)))).toString())}</td>
         </tr>
         <tr>
-            <td style="width: 20%;">${extrasDisVal.isEmpty ? "" : "Extra Item : $extrasDisVal"}</td>
+            <td style="width: 20%;">${extrasDisVal.isEmpty
+          ? ""
+          : "Extra Item : $extrasDisVal"}</td>
         </tr>
     """;
       htmlList.add(product);
@@ -2686,7 +2766,11 @@ class FireStoreUtils {
                 amount: (total - discount - specialDiscount).toString(),
                 taxModel: element);
         String taxHtml =
-        """<span style="font-size: 1rem;">${element.title}: ${amountShow(amount: calculateTax(amount: (total - discount - specialDiscount).toString(), taxModel: element).toString())}${taxList!.indexOf(element) == taxList!.length - 1 ? "</span>" : "<br></span>"}""";
+        """<span style="font-size: 1rem;">${element.title}: ${amountShow(
+            amount: calculateTax(
+                amount: (total - discount - specialDiscount).toString(),
+                taxModel: element).toString())}${taxList!.indexOf(element) ==
+            taxList!.length - 1 ? "</span>" : "<br></span>"}""";
         taxHtmlList.add(taxHtml);
       }
     }
@@ -2775,6 +2859,7 @@ class FireStoreUtils {
       quality: 75,
     );
   }
+
   /// compress video file to make it load faster but with lower quality,
   /// change the quality parameter to control the quality of the video after
   /// being compressed
@@ -2822,8 +2907,8 @@ class FireStoreUtils {
     }
   }
 
-  static handleFacebookLogin(
-      Map<String, dynamic> userData, AccessToken token) async {
+  static handleFacebookLogin(Map<String, dynamic> userData,
+      AccessToken token) async {
     auth.UserCredential authResult = await auth.FirebaseAuth.instance
         .signInWithCredential(
         auth.FacebookAuthProvider.credential(""));
@@ -2891,10 +2976,8 @@ class FireStoreUtils {
     }
   }
 
-  static handleAppleLogin(
-      auth.AuthCredential credential,
-      apple.AppleIdCredential appleIdCredential,
-      ) async {
+  static handleAppleLogin(auth.AuthCredential credential,
+      apple.AppleIdCredential appleIdCredential,) async {
     auth.UserCredential authResult =
     await auth.FirebaseAuth.instance.signInWithCredential(credential);
     User? user = await getCurrentUser(authResult.user?.uid ?? '');
@@ -2929,8 +3012,8 @@ class FireStoreUtils {
 
   /// save a new user document in the USERS table in firebase firestore
   /// returns an error message on failure or null on success
-  static Future<String?> firebaseCreateNewUser(
-      User user, String referralCode) async {
+  static Future<String?> firebaseCreateNewUser(User user,
+      String referralCode) async {
     try {
       if (referralCode.isNotEmpty) {
         FireStoreUtils.getReferralUserByCode(referralCode.toString())
@@ -3075,8 +3158,8 @@ class FireStoreUtils {
   /// login with email and password with firebase
   /// @param email user email
   /// @param password user password
-  static Future<dynamic> loginWithEmailAndPassword(
-      String email, String password) async {
+  static Future<dynamic> loginWithEmailAndPassword(String email,
+      String password) async {
     print("reslet=======>>>>>>${email}${password}");
     try {
       print('FireStoreUtils.loginWithEmailAndPassword');
@@ -3122,13 +3205,11 @@ class FireStoreUtils {
 
   ///submit a phone number to firebase to receive a code verification, will
   ///be used later to login
-  static firebaseSubmitPhoneNumber(
-      String phoneNumber,
+  static firebaseSubmitPhoneNumber(String phoneNumber,
       auth.PhoneCodeAutoRetrievalTimeout? phoneCodeAutoRetrievalTimeout,
       auth.PhoneCodeSent? phoneCodeSent,
       auth.PhoneVerificationFailed? phoneVerificationFailed,
-      auth.PhoneVerificationCompleted? phoneVerificationCompleted,
-      ) {
+      auth.PhoneVerificationCompleted? phoneVerificationCompleted,) {
     auth.FirebaseAuth.instance.verifyPhoneNumber(
       timeout: Duration(minutes: 2),
       phoneNumber: phoneNumber,
@@ -3197,7 +3278,9 @@ class FireStoreUtils {
           compressedImage = image; // fallback
         }
 
-        final bytes = compressedImage.readAsBytesSync().lengthInBytes;
+        final bytes = compressedImage
+            .readAsBytesSync()
+            .lengthInBytes;
         final kb = bytes / 1024;
         final mb = kb / 1024;
 
@@ -3234,8 +3317,8 @@ class FireStoreUtils {
       }
     }
   }
-  static Future<dynamic> firebaseSignUpWithEmailAndPassword(
-      String emailAddress,
+
+  static Future<dynamic> firebaseSignUpWithEmailAndPassword(String emailAddress,
       String password,
       File? image,
       String firstName,
@@ -3246,7 +3329,7 @@ class FireStoreUtils {
     try {
       // CORRECTED: Create user with email and password - call this on FirebaseAuth
       auth.UserCredential result = await auth.FirebaseAuth.instance
-          .createUserWithEmailAndPassword(  // Proper method name (note lowercase 'w')
+          .createUserWithEmailAndPassword( // Proper method name (note lowercase 'w')
           email: emailAddress, password: password);
 
       String profilePicUrl = '';
@@ -3261,10 +3344,13 @@ class FireStoreUtils {
             '${image.parent.path}/compressed_${image.uri.pathSegments.last}',
           ).writeAsBytes(compressedBytes);
         } else {
-          compressedImage = image; // Fallback to original image if compression fails
+          compressedImage =
+              image; // Fallback to original image if compression fails
         }
 
-        final bytes = compressedImage.readAsBytesSync().lengthInBytes;
+        final bytes = compressedImage
+            .readAsBytesSync()
+            .lengthInBytes;
         final kb = bytes / 1024;
         final mb = kb / 1024;
 
@@ -3327,12 +3413,13 @@ class FireStoreUtils {
           break;
       }
       return message; // Return error message
-    } catch (e,stackTrace) {
+    } catch (e, stackTrace) {
       print("Error: ${e}");
       print("Error:123456 ${stackTrace}");
       return "notSignUp".tr(); // Return generic error message
     }
   }
+
   // static firebaseSignUpWithEmailAndPassword(
   //     String emailAddress,
   //     String password,
@@ -3534,7 +3621,9 @@ class FireStoreUtils {
     await Future.forEach(productsQuery.docs,
             (QueryDocumentSnapshot<Map<String, dynamic>> document) {
           if (document.data().containsKey("categoryID") &&
-              document.data()['categoryID'].toString().isNotEmpty) {
+              document.data()['categoryID']
+                  .toString()
+                  .isNotEmpty) {
             prodtagList.add(document.data()['categoryID']);
           }
         });
@@ -3546,9 +3635,13 @@ class FireStoreUtils {
             (QueryDocumentSnapshot<Map<String, dynamic>> document) {
           Map<String, dynamic> catDoc = document.data();
           if (catDoc.containsKey("id") &&
-              catDoc['id'].toString().isNotEmpty &&
+              catDoc['id']
+                  .toString()
+                  .isNotEmpty &&
               catDoc.containsKey("title") &&
-              catDoc['title'].toString().isNotEmpty &&
+              catDoc['title']
+                  .toString()
+                  .isNotEmpty &&
               prodtagList.contains(catDoc['id'])) {
             tagList.add(catDoc['title']);
           }

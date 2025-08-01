@@ -118,7 +118,7 @@ class _InboxScreenState extends State<InboxScreen> {
           InboxModel inboxModel = InboxModel.fromJson(data!);
           return InkWell(
             onTap: () async {
-              await showProgress(context, "Please wait".tr(), false);
+              // await showProgress(context, "Please wait".tr(), false);
 
               User? customer = await FireStoreUtils.getCurrentUser(
                 inboxModel.customerId.toString(),
@@ -129,7 +129,7 @@ class _InboxScreenState extends State<InboxScreen> {
               VendorModel? vendorModel = await FireStoreUtils.getVendor(
                 restaurantUser!.vendorID.toString(),
               );
-              hideProgress();
+              // hideProgress();
               push(
                 context,
                 ChatScreens(

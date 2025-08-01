@@ -118,7 +118,7 @@ class _InboxDriverScreenState extends State<InboxDriverScreen> {
           InboxModel inboxModel = InboxModel.fromJson(data!);
           return InkWell(
             onTap: () async {
-              await showProgress(context, "Please wait".tr(), false);
+              // await showProgress(context, "Please wait".tr(), false);
 
               User? customer = await FireStoreUtils.getCurrentUser(
                 inboxModel.customerId.toString(),
@@ -126,23 +126,41 @@ class _InboxDriverScreenState extends State<InboxDriverScreen> {
               User? restaurantUser = await FireStoreUtils.getCurrentUser(
                 inboxModel.restaurantId.toString(),
               );
-              hideProgress();
-              push(
+              // hideProgress();
+              print("====>>>>>>sdadasda${restaurantUser!.firstName}");
+              // push(
+              //   context,
+              //   ChatScreens(
+              //     customerName:
+              //         '${customer!.firstName + " " + customer.lastName}',
+              //     restaurantName:
+              //         '${restaurantUser!.firstName + " " + restaurantUser.lastName}',
+              //     orderId: inboxModel.orderId,
+              //     restaurantId: restaurantUser.userID,
+              //     customerId: customer.userID,
+              //     customerProfileImage: customer.profilePictureURL,
+              //     restaurantProfileImage: restaurantUser.profilePictureURL,
+              //     token: restaurantUser.fcmToken,
+              //     chatType: inboxModel.chatType,
+              //   ),
+              // );
+              Navigator.push(
                 context,
-                ChatScreens(
-                  customerName:
-                      '${customer!.firstName + " " + customer.lastName}',
-                  restaurantName:
-                      '${restaurantUser!.firstName + " " + restaurantUser.lastName}',
-                  orderId: inboxModel.orderId,
-                  restaurantId: restaurantUser.userID,
-                  customerId: customer.userID,
-                  customerProfileImage: customer.profilePictureURL,
-                  restaurantProfileImage: restaurantUser.profilePictureURL,
-                  token: restaurantUser.fcmToken,
-                  chatType: inboxModel.chatType,
+                MaterialPageRoute(
+                  builder: (context) => ChatScreens(
+                    customerName: '${customer!.firstName} ${customer.lastName}',
+                    restaurantName: '${restaurantUser!.firstName} ${restaurantUser.lastName}',
+                    orderId: inboxModel.orderId,
+                    restaurantId: restaurantUser.userID,
+                    customerId: customer.userID,
+                    customerProfileImage: customer.profilePictureURL,
+                    restaurantProfileImage: restaurantUser.profilePictureURL,
+                    token: restaurantUser.fcmToken,
+                    chatType: inboxModel.chatType,
+                  ),
                 ),
               );
+
             },
             child: ListTile(
               leading: ClipOval(
